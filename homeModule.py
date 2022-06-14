@@ -13,7 +13,7 @@ from datetime import datetime
 import function as fun
 def Home():
 	#Intro section
-	print("\t\t\t\t\t\t WELCOME TO HOTEL Garrison\n")
+	print("\t\t\t\t\t\t WELCOME TO HOTEL GARRISON\n")
 	date_string = datetime.now().strftime("%d%m%Y%H%M%S")
 	filename = "voice"+date_string
 	fun.tts("Welcome to Garrison",filename+"welcome")
@@ -40,7 +40,7 @@ def Home():
 		print(" ")
 		booking.Booking()
 	
-	elif ch == 2:
+	elif ch == "roomsinfo" or "rooms info":
 		print(" ")
 		room.Rooms_Info()
 	
@@ -48,7 +48,7 @@ def Home():
 		print(" ")
 		roomServe.restaurant()
 	
-	elif ch == 4:
+	elif ch == "payment" or "payments":
 		print(" ")
 		payment.Payment()
 	

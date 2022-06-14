@@ -1,7 +1,5 @@
 from cgi import print_arguments
-import datetime
 import random
-import time
 
 import gtts
 from recordModule import Record
@@ -12,13 +10,16 @@ from gtts import gTTS
 from playsound import playsound
 import speech_recognition as sr
 import function as fun
+from datetime import datetime
 
 #globals
 """this module will conatin the bookings section"""
 
 # Booking function
 def Booking():
-		fun.tts("Lets book a room for you",var.filename+"booking")
+		date_string = datetime.now().strftime("%d%m%Y%H%M%S")
+		filename = "voice"+date_string
+		fun.tts("Lets book a room for you",filename+"booking")
 		# used global keyword to
 		# use global variable 'i'
 		global i
@@ -26,17 +27,17 @@ def Booking():
 		print(" ")
 		
 		while 1:
-			fun.tts("What is your name", var.filename+"wname")
+			fun.tts("What is your name", filename+"wname")
 			n = fun.record()
 			print("name: "+n)
 			# n = str(input("Name: "))
 
-			fun.tts("Hello"+n+"Please tell your phone number",  var.filename+"wphone")
+			fun.tts("Hello"+n+"Please tell your phone number",  filename+"wphone")
 			p1 = str(fun.record())
 			print("Phone No: "+p1.replace(" ", ""))
 			# p1 = str(input("Phone No.: "))
 
-			fun.tts("Please provide your address",  var.filename+"waddr")
+			fun.tts("Please provide your address",  filename+"waddr")
 			a = str(fun.record())
 			print("Address: "+a)
 			# a = str(input("Address: "))
@@ -51,7 +52,7 @@ def Booking():
 				print("\tName, Phone no. & Address cannot be empty..!!")
 		
 		#date section
-		fun.tts("Please provide your check-in date",  var.filename+"wcheckIn")
+		fun.tts("Please provide your check-in date",  filename+"wcheckIn")
 		# ciidate = str(fun.record())
 		# ciimonth = str(fun.record())
 		# ciiyear = str(fun.record())
@@ -66,7 +67,7 @@ def Booking():
 		ci[2]=int(ci[2])
         #to be changes later
 		datem.date(ci)
-		fun.tts("Please provide your check-out date",  var.filename+"wcheckOut")
+		fun.tts("Please provide your check-out date",  filename+"wcheckOut")
 		# coodate = str(fun.record())
 		# coomonth = str(fun.record())
 		# cooyear = str(fun.record())
@@ -108,27 +109,27 @@ def Booking():
 		var.day.append(d)
 		
 		
-		fun.tts("Selet room type",  var.filename+"roomType")
+		fun.tts("Selet room type",  filename+"roomType")
 		print("----SELECT ROOM TYPE----")
 		print(" 1. Standard Non-AC")
 		print(" 2. Standard AC")
 		print(" 3. Double bed Non-AC")
 		print(" 4. Double bed AC")
 		#print(("\t\tPress 0 for Room Prices"))
-		fun.tts("Say Details to check out the Prices", var.filename+"detail")
+		fun.tts("Say Details to check out the Prices", filename+"detail")
 		ch = str(fun.record()).lower().replace(" ", "")
 		#ch=int(input("->"))
 		
 		# if-conditions to display alloted room
 		# type and it's price
 		if ch=="details" or ch=="detail":
-			fun.tts("Here are the room Details",  var.filename+"roomDetail")
+			fun.tts("Here are the room Details",  filename+"roomDetail")
 			print(" 1. Standard Non-AC - Rs. 3500")
 			print(" 2. Standard AC - Rs. 4000")
 			print(" 3. Double Bed Non-AC - Rs. 4500")
 			print(" 4. Double bed AC - Rs. 5000")
-			time.sleep(5)
-			fun.tts("Selet room type",  var.filename+"roomType1")
+			time.sleep(2)
+			fun.tts("Selet room type",  filename+"roomType1")
 			ch = str(fun.record()).lower().replace(" ", "")
 			#ch=int(input("->"))
 		if ch== "standardnonac":
@@ -152,7 +153,16 @@ def Booking():
 			var.price.append(5000)
 			print("Price- 5000")
 		else:
-			print(" Wrong choice..!!")
+			print("Wrong choice..!!")
+			fun.tts("Say menu to go back to main menu",filename+"backtomenu")
+			print("Say menu to go back to main menu")
+			# n = int(input("0-BACK\n ->"))
+			n = str(fun.record()).lower()
+			if n == "menu":
+				home.Home()
+			else:
+				#to be changes later
+				exit()
 
 
 		# randomly generating room no. and customer
@@ -188,19 +198,19 @@ def Booking():
 						var.checkout.pop(i)
 						Booking()
 		print("")
-		fun.tts("Congratulation, your room was booked",  var.filename+"roomBookCongrats")
+		fun.tts("Congratulation, your room was booked",  filename+"roomBookCongrats")
 		print("\t\t\t***ROOM BOOKED SUCCESSFULLY***\n")
 		roomno = str(rn)
-		fun.tts("Your room number is "+roomno,  var.filename+"RoomNo")
+		fun.tts("Your room number is "+roomno,  filename+"RoomNo")
 		print("Room No. - ",rn)
 		custid = str(cid)
-		fun.tts("Your customer ID is "+custid,  var.filename+"custId")
+		fun.tts("Your customer ID is "+custid,  filename+"custId")
 		print("Customer Id - ",cid)
 		var.roomno.append(rn)
 		var.custid.append(cid)
 		var.i=var.i+1
 
-		fun.tts("Say menu to go back to main menu",var.filename+"backtomenu")
+		fun.tts("Say menu to go back to main menu",filename+"backtomenu")
 		print("Say menu to go back to main menu")
 		# n = int(input("0-BACK\n ->"))
 		n = str(fun.record()).lower()
@@ -208,4 +218,4 @@ def Booking():
 			home.Home()
 		else:
             #to be changes later
-			var.exit()
+			exit()

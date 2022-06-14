@@ -8,10 +8,16 @@ import speech_recognition as sr
 from gtts import gTTS
 from playsound import playsound
 import os
+
+class exce(Exception):
+    def __init__(self):
+        record()
+
 def record():
     var.hear
     with sr.Microphone() as source:
         var.hear.adjust_for_ambient_noise(source)
+       # var.hear.energy_threshold(int(800))
         print("Listening...")
         audio = var.hear.listen(source)
         try:
@@ -19,6 +25,7 @@ def record():
             return text
         except:
             print("Could not listene")
+            # raise(exce())
      
 save_path = "./AudioFiles"      
 def tts(text,fileName):

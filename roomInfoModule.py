@@ -1,4 +1,10 @@
 import homeModule as home
+import varModule as var
+import function as fun
+from datetime import datetime
+
+date_string = datetime.now().strftime("%d%m%Y%H%M%S")
+filename = "voice"+date_string
 # ROOMS INFO
 def Rooms_Info():
 	print("		 ------ HOTEL ROOMS INFO ------")
@@ -26,8 +32,12 @@ def Rooms_Info():
 	print("1 Side table, Balcony with an Accent table with 2 Chair and an")
 	print("attached washroom with hot/cold water + Window/Split AC.\n\n")
 	print()
-	n=int(input("0-BACK\n ->"))
-	if n==0:
+	
+	fun.tts("Say menu to go back to main menu",var.filename+"backtomenu")
+	print("Say menu to go back to main menu")
+	# n = int(input("0-BACK\n ->"))
+	n = str(fun.record()).lower()
+	if n == "menu":
 		home.Home()
 	else:
 		exit()
